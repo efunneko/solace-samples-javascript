@@ -28,19 +28,17 @@
 
 var TopicPublisher = function (topicName) {
     'use strict';
-    var publisher = {};
-    publisher.session = null;
+    var publisher       = {};
+    publisher.session   = null;
     publisher.topicName = topicName;
 
     // Logger
     publisher.log = function (line) {
-        var now = new Date();
-        var time = [('0' + now.getHours()).slice(-2), ('0' + now.getMinutes()).slice(-2), ('0' + now.getSeconds()).slice(-2)];
-        var timestamp = '[' + time.join(':') + '] ';
-        console.log(timestamp + line);
-        var logTextArea = document.getElementById('log');
-        logTextArea.value += timestamp + line + '\n';
-        logTextArea.scrollTop = logTextArea.scrollHeight;
+      var timestamp         =  "[" + (new Date()).toLocaleTimeString() + "] ";
+      var logTextArea       =  document.getElementById('log');
+      logTextArea.value     += timestamp + line + '\n';
+      logTextArea.scrollTop =  logTextArea.scrollHeight;
+      console.log(timestamp + line);
     };
 
     publisher.log('\n*** Publisher to topic "' + publisher.topicName + '" is ready to connect ***');
@@ -145,4 +143,24 @@ var TopicPublisher = function (topicName) {
     };
 
     return publisher;
+};
+
+
+window.onload = function () {
+
+  // enable logging to JavaScript console at INFO level
+  // NOTICE: works only with "lib/solclient-debug.js"
+  var factoryProps = new solace.SolclientFactoryProperties();
+
+  factoryProps.logLevel = solace.LogLevel.INFO;
+  solace.SolclientFactory.init(factoryProps);
+
+  // create the publisher, specifying name of the subscription topic
+  var publisher = new TopicPublisher('tutorial/topic');
+
+  // assign buttons to the publisher functions
+  document.getElementById("connect").addEventListener("click", publisher.connect);
+  document.getElementById("disconnect").addEventListener("click", publisher.disconnect);
+  document.getElementById("publish").addEventListener("click", publisher.publish);
+  
 };

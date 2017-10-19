@@ -25,46 +25,54 @@
 -->
 
 <html lang="en">
-    <head>
-        <title>Solace Systems Web Messaging API for JavaScript, PublishSubscribe tutorial - Topic Publisher</title>
-        <meta charset="utf-8"/>
+  <head>
+    <title>Solace Systems Web Messaging API for JavaScript, PublishSubscribe tutorial - Topic Publisher</title>
+    <meta charset="utf-8"/>
 
-        <!-- Load Solace Systems Web Messaging API for JavaScript -->
-        <script src="lib/solclient-debug.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/pure.css"></link>
+    <link rel="stylesheet" type="text/css" href="css/samples.css"></link>
+    
+    <!-- Load Solace Systems Web Messaging API for JavaScript -->
+    <script src="lib/solclient-debug.js"></script>
 
-        <!-- Load the PublishSubscribe Topic Publisher tutorial -->
-        <script src="TopicPublisher.js"></script>
+    <!-- Load the PublishSubscribe Topic Publisher tutorial -->
+    <script src="TopicPublisher.js"></script>
 
-        <!-- Execute the PublishSubscribe Topic Publisher tutorial -->
-        <script>
-            window.onload = function () {
-                // enable logging to JavaScript console at INFO level
-                // NOTICE: works only with "lib/solclient-debug.js"
-                var factoryProps = new solace.SolclientFactoryProperties();
-                factoryProps.logLevel = solace.LogLevel.INFO;
-                solace.SolclientFactory.init(factoryProps);
-                // create the publisher, specifying name of the subscription topic
-                var publisher = new TopicPublisher('tutorial/topic');
-                // assign buttons to the publisher functions
-                document.getElementById("connect").addEventListener("click", publisher.connect);
-                document.getElementById("disconnect").addEventListener("click", publisher.disconnect);
-                document.getElementById("publish").addEventListener("click", publisher.publish);
-            };
-        </script>
-    </head>
-    <body>
-        <h1>Solace Systems Web Messaging API for JavaScript</h1>
-        <h2>PublishSubscribe Tutorial</h2>
-        <h3>Topic Publisher</h3>
+    <!-- Execute the PublishSubscribe Topic Publisher tutorial -->
+    <script>
+    </script>
+    
+  </head>
+  <body>
+
+    <div class="banner">
+      <div class="banner-interior">
+        <span class="logo">
+          <a href="http://dev.solace.com/">
+            <img src="images/solace-logo-white.png"/>
+          </a>
+        </span>
+        <div class="banner-heading">
+          Solace Systems Web Messaging API for JavaScript
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-body">
+      <h2>PublishSubscribe Tutorial</h2>
+      <h3>Topic Publisher</h3>
+      <form class="pure-form">
+        <label for = "host">Solace router web transport URL </label>
+        <input type = "text" id = "host" placeholder = "router-webtransport-url" />
+        <button type = "button" class="pure-button pure-button-primary" id="connect">Connect</button>
+        <button type = "button"  class="button-error pure-button" id="disconnect">Disconnect</button>
         <p>
-            <label>Solace router web transport URL: </label><input type = "text" id = "host" value = "XXX.XXX.XXX.XXX:80" />
-            <button id="connect">Connect</button>
-            <button id="disconnect">Disconnect</button>
-        </p>
-        <p>
-            <button id="publish">Publish Message</button>
+          <button type = "button" class="pure-button pure-button-primary" id="publish">Publish Message</button>
         </p>
         <textarea id="log" rows="20" cols="90" autofocus></textarea>
-    </body>
+      </form>
+    </div>
+    
+  </body>
 </html>
 
